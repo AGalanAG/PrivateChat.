@@ -8,6 +8,7 @@ const socketIO = io("http://localhost:3000",{ //asignar el dominio
 
 
 
+
 let AddFriend = document.getElementById('add');
  let bar = document.getElementById('bar');
  let mjs = "";
@@ -15,7 +16,7 @@ let AddFriend = document.getElementById('add');
 AddFriend.addEventListener('click',()=>{
 	let Friend = prompt('Ingresa el correo de tu amigo para agregarlo');
 
-	
+socketIO.emit('add',Friend);
 	//$(jq).post( "Sala.php",Friend );
 
 });

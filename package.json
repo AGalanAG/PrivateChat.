@@ -13,6 +13,7 @@
     "http": "^0.0.1-security",
     "jquery": "^3.6.3",
     "mysql": "^2.18.1",
+    "mysql-stored-procedures": "^1.0.1",
     "socket.io": "^4.6.0"
   }
 }
