@@ -121,7 +121,7 @@ BEGIN
     DECLARE cursor1 CURSOR FOR SELECT friends.IdRelacion FROM friends WHERE friends.User1id = Id OR friends.User2id = Id;
 
     DECLARE CONTINUE HANDLER FOR NOT FOUND SET var_final = 1;
-    CREATE TEMPORARY TABLE Amigos (Nombre VARCHAR(255));
+    CREATE TEMPORARY TABLE Amigos (Nombre VARCHAR(255),Correo VARCHAR(255));
 
 set @num = (SELECT COUNT(friends.IdRelacion) FROM friends WHERE friends.User1id = Id OR friends.User2id = Id);
 
@@ -142,13 +142,13 @@ set @num = (SELECT COUNT(friends.IdRelacion) FROM friends WHERE friends.User1id 
              WHERE friends.IdRelacion = IdRela AND friends.User1id=Id);
             IF @numRel > 0 THEN
 
-                set @nombre=(SELECT user.FullName from user WHERE user.IdUsers = (SELECT friends.User2id from friends WHERE friends.IdRelacion = IdRela AND friends.User1id=Id));
-                INSERT INTO Amigos values(@nombre);
+                INSERT INTO Amigos (Nombre,Correo) SELECT user.FullName from user WHERE user.IdUsers = (SELECT friends.User2id from friends WHERE friends.IdRelacion = IdRela AND friends.User1id=Id);
+                
 
             ELSE
 
-                set @nombre=(SELECT user.FullName from user WHERE user.IdUsers = (SELECT friends.User1id from friends WHERE friends.IdRelacion = IdRela AND friends.User2id=Id));
-                INSERT INTO Amigos values(@nombre);
+                INSERT INTO Amigos (Nombre,Correo) SELECT user.FullName from user WHERE user.IdUsers = (SELECT friends.User1id from friends WHERE friends.IdRelacion = IdRela AND friends.User2id=Id);
+                
 
             END IF;
 

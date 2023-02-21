@@ -4,45 +4,33 @@
   require 'conexionDB.php';
 
   if (isset($_SESSION['user_id'])) {
-        $records = $conn->prepare('SELECT IdUsers,FullName,Email, Password FROM user WHERE IdUsers = :IdUsers');
-        $records->bindParam(':IdUsers', $_SESSION['user_id']);
-        $records->execute();
-        $results = $records->fetch(PDO::FETCH_ASSOC);
 
-        $user = null;
+        $user = $_SESSION['nombre'] ;
 
-            if (count($results) > 0) {
-                  $user = $results;
-                $id=$user['IdUsers'];
+          $id = $_SESSION['user_id'];
 
-            // $records2 = $conn->prepare('SELECT FullName FROM friends WHERE Userid = :id ');
-            // $records2->bindParam(':id', $_SESSION['user_id']);
-            // $records2->execute();
-            // $results2 = $records2->fetch(PDO::FETCH_ASSOC);
-
-            //                     if (count($results2) > 0) {
-            //     $frieds=$results2;
-            //      $message = 1;
-            //    }
-
-                    $sql = "SELECT FullName FROM friends WHERE Userid = $id ";
-                  $result = $conn->prepare($sql);
-                  $result->execute([]);
-                  $friends = $result->fetchAll();
-                      if ($friends != null) {
-                          $message = 1;
-                          foreach ($friends as $friend):
-                            endforeach;
-
-                      }else{
-                            $message=0;
-                    
-                          }
-
-
-            }
-
+          $mail = $_SESSION['mail'];
+    
   }
+
+
+    $result=$conn->query("CALL ExistFriendS('$id')");
+  
+  if(!$result) {
+    die('Query Failed'. mysqli_error($connection));
+  }
+
+  $json = array();
+  while($row = mysqli_fetch_array($result)) {
+    $json[] = array(
+      'Nombre' => $row['Nombre'],
+      'Correo' => $row['Correo']
+    );
+  }
+  $jsonstring = json_encode($json);
+  echo $jsonstring;
+
+
 
 
 ?>

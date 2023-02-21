@@ -1,14 +1,9 @@
 <?php
 
-$server = 'localhost';
-$username = 'root';
-$password = 'root';
-$database = 'ChatPersonal';
 
-try {
-  $conn = new PDO("mysql:host=$server;dbname=$database;", $username, $password);
-} catch (PDOException $e) {
-  die('Connection Failed: ' . $e->getMessage());
+$conn = new mysqli("localhost", "root", "root", "ChatPersonal");
+if ($conn->connect_errno) {
+    echo "Fallo al conectar a MySQL: (" . $conn->connect_errno . ") " . $conn->connect_error;
 }
 
 ?>

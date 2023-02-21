@@ -20,7 +20,8 @@
 <!-- Navigation Bar -->
 <div class="navbar" id="bar">
   <a href="#" id="add">Contactos</a>
-  <a href="#"><?= $user['FullName']; ?></a>
+  <a href="#" id="usnombre"><?= $user; ?></a>
+  <a href="#" id="usmail"> <?= $mail; ?> </a>
    <a href="cerrar.php">Cerrar sesion</a>
   
 </div>
@@ -29,18 +30,8 @@
 <div class="row">
   <div class="side">
     <h2>Contactos</h2>
-    <div class="contactos">
-        <?php
-        if (!empty($_POST['Friend'])){
-          echo $Friend;
-        }
+    <div class="contactos" id="contactos">
 
-        if ($message==1) {
-           echo $friend['FullName'];  echo $id;
-         }else{
-          echo "No hay amigos";
-         }
-        ?>
     </div>
   
   </div>
@@ -73,7 +64,8 @@
 </div>
 
  
-    
-  </script>
 </body>
+
+  <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+  <script src="cliente.js"  type="text/javascript"></script>
 </html>
