@@ -1,14 +1,13 @@
 $(document).ready(function(){
-	  // Testing Jquery
+    // Testing Jquery
   console.log('jquery is working!');
 
   let correo = $('#usmail').html();
   // document.getElementById('usmail').innerHTML;
 
-     const postData = {
-      correo: $('#usmail').html()};
-    	
-    $.post('serv.php', postData, (response) => {
+     const postData = {correo: $('#usmail').html()};
+      
+    $.post('backend.php', postData, (response) => {
       console.log(response);
      
       fetchTasks();
@@ -17,7 +16,7 @@ $(document).ready(function(){
 
       function fetchTasks() {
     $.ajax({
-      url: 'serv.php',
+      url: 'backend.php',
       type: 'GET',
       success: function(response) {
         const tasks = JSON.parse(response);
@@ -39,5 +38,20 @@ $(document).ready(function(){
       }
     });
   }
+
+
+        let p = document.getElementById("add"); // Encuentra el elemento "p" en el sitio
+      p.onclick = ()=>{
+        let Mailamigo= prompt("Ingresa el correo de tu amigo:");
+        const Datos = {correo1: $('#usmail').html(),correo2:Mailamigo}   
+            $.post('addFriend.php', Datos, (response) => {
+      console.log(response);
+     fetchTasks();
+      
+    });
+
+      } 
+
+
 
 });

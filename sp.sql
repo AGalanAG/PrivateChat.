@@ -43,7 +43,7 @@ IF @check != ' ' THEN
     SELECT @mensaje;
  ELSE
 
-  INSERT INTO user values(' ',FullName,Email,Password);
+  INSERT INTO user(FullName,Email,Password) values(FullName,Email,Password);
 
  END IF;
  
@@ -75,7 +75,7 @@ set @mail1=(SELECT user.IdUsers from user WHERE user.Email =correo1);
 
             IF @User1 >0 AND @User2 >0 THEN
 
-                INSERT INTO friends values(' ',@mail1,@mail2);
+                INSERT INTO friends(User1id,User2id) values(@mail1,@mail2);
 
                 set @idrelacion =(SELECT friends.IdRelacion from friends WHERE friends.User1id = @mail1 AND friends.User2id=@mail2);
                 --INSERT INTO chats VALUES(' ',@idrelacion,NULL,@mail1,@mail2);
@@ -190,11 +190,11 @@ set @mail1=(SELECT user.IdUsers from user WHERE user.Email =correo1);
 
         IF @idConv != ' ' THEN
             set @Tiempo=NOW();
-            INSERT INTO message values(' ',msj,@Tiempo,@mail1);
+            INSERT INTO message(Message,MsjDate,IdSender) values(msj,@Tiempo,@mail1);
 
             set @IdMsj= (SELECT message.IdMsj from message WHERE message.Message=msj AND message.MsjDate = @Tiempo AND message.IdSender = @mail1);
 
-            INSERT INTO chats VALUES(' ',@idConv,@IdMsj,@mail1,@mail2);
+            INSERT INTO chats( IdRela,IdMessage,User1,User2) VALUES(@idConv,@IdMsj,@mail1,@mail2);
 
             
             
@@ -206,3 +206,4 @@ set @mail1=(SELECT user.IdUsers from user WHERE user.Email =correo1);
 
 END$$
 DELIMITER ;
+

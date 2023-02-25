@@ -1,4 +1,4 @@
-<?php  require 'serv.php'; ?>
+<?php  require 'serv.php'; //require 'backend.php'; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,9 +19,10 @@
 
 <!-- Navigation Bar -->
 <div class="navbar" id="bar">
-  <a href="#" id="add">Contactos</a>
+  <!-- <a href="#" id="add">Contactos</a> -->
   <a href="#" id="usnombre"><?= $user; ?></a>
   <a href="#" id="usmail"> <?= $mail; ?> </a>
+  <a href="#" id="add">Agregar amigo</a> 
    <a href="cerrar.php">Cerrar sesion</a>
   
 </div>

@@ -1,17 +1,17 @@
-CREATE TABLE `User` (
+CREATE TABLE `user` (
   `IdUsers` int PRIMARY KEY AUTO_INCREMENT,
   `FullName` varchar(255),
   `Email` varchar(255),
   `Password` varchar(255)
 );
 
-CREATE TABLE `Friends` (
+CREATE TABLE `friends` (
   `IdRelacion` int PRIMARY KEY AUTO_INCREMENT,
   `User1id` int,
   `User2id` int
 );
 
-CREATE TABLE `Chats` (
+CREATE TABLE `chats` (
   `IdChat` int PRIMARY KEY AUTO_INCREMENT,
   `IdRela` int,
   `IdMessage` int,
@@ -19,7 +19,7 @@ CREATE TABLE `Chats` (
   `User2` int
 );
 
-CREATE TABLE `Message` (
+CREATE TABLE `message` (
   `IdMsj` int PRIMARY KEY AUTO_INCREMENT,
   `Message` varchar(255),
   `MsjDate` datetime,
